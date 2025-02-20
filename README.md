@@ -21,6 +21,10 @@ To initialize the python application on Windows, cd to the root directory of the
 ```bash 
 pipenv install
 pipenv shell
+```
+
+Then cd to `backend` directory and run
+```bash
 python manage.py migrate
 ```
 
@@ -29,7 +33,15 @@ To intialize the python application on Linux, cd to the root directory of the pr
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
+pipenv install
 ```
+
+Then cd to `backend` directory and run
+```bash
+python manage.py migrate
+```
+
+### Frontend (OS independent)
 
 To initialize the react ts application, cd to the `/frontend/` directory and run
 ```bash
