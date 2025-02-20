@@ -18,7 +18,7 @@ NPM Version 10.9.2
 To initialize the python application, cd to the root directory of the project and run
 ```bash 
 pipenv install
-pienv shell
+pipenv shell
 python manage.py migrate
 ```
 
