@@ -1,4 +1,3 @@
-import {useEffect, useState} from 'react';
 import { api } from '../api';
 import './App.css';
 
@@ -9,17 +8,25 @@ interface GptCall {
 }
 
 function App() {
-    const [gptCalls, setGptCalls] = useState<GptCall[]>([])
+    const gptCalls: GptCall[] = [];
 
-    useEffect(() => {
-        api.get('/gptcall/', {
-            headers: {
-                'Accept': 'application/json',
+    api.post('/gptcall/',
+            {
+                query: 'What is the capital of France?'
+            },
+            {
+                headers: {
+                    'Accept': 'application/json'
+                }
             }
+        )
+        .then(res => {
+            console.log(res.data);
+            gptCalls.push(res.data)
         })
-            .then(res => setGptCalls(res.data))
-            .catch(err => console.log(err));
-    }, []);
+        .catch(err => console.error(err));
+
+    console.log(gptCalls);
 
     return (
         <>
