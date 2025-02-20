@@ -15,11 +15,20 @@ NPM Version 10.9.2
 - `django`
 
 ## Installation
-To initialize the python application, cd to the root directory of the project and run
+
+### Windows
+To initialize the python application on Windows, cd to the root directory of the project and run
 ```bash 
 pipenv install
 pipenv shell
 python manage.py migrate
+```
+
+### Linux
+To intialize the python application on Linux, cd to the root directory of the project and run
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
 To initialize the react ts application, cd to the `/frontend/` directory and run
