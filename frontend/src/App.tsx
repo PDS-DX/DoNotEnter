@@ -1,43 +1,15 @@
-import { api } from '../api';
-import './App.css';
-
-interface GptCall {
-    id: number;
-    query: string | undefined;
-    reply: string | undefined;
-}
+import "./App.css";
+import Chat from "./components/Chat.tsx";
+import {
+    Grid2 as Grid,
+} from "@mui/material";
 
 function App() {
-    const gptCalls: GptCall[] = [];
-
-    api.post('/gptcall/',
-            {
-                query: 'What is the capital of France?'
-            },
-            {
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }
-        )
-        .then(res => {
-            console.log(res.data);
-            gptCalls.push(res.data)
-        })
-        .catch(err => console.error(err));
-
-    console.log(gptCalls);
-
-    return (
-        <>
-            {gptCalls.map((gptCall) => (
-                <div key={gptCall.id}>
-                    <p>{gptCall.query}</p>
-                    <p>{gptCall.reply}</p>
-                </div>
-            ))}
-        </>
-    )
+    return <>
+        <Grid container spacing={2} justifyContent="center">
+            <Chat />
+        </Grid>
+    </>
 }
 
-export default App
+export default App;
