@@ -7,13 +7,16 @@ class GPTService:
         # Dependency Injection: Allows you to pass a mock client for testing
         self.client = openai_client or OpenAI(api_key=settings.OPENAI_API_KEY)
 
-    def create_gpt_call(self, query: str):
+    def create_gpt_call(self, query: str, history: list = None):
+        if history is None:
+            history = [
+                {"role": "system", "content": "You are an inquisitive and mysterious man. You only give conversational responses, not verbose ones."},
+                {"role": "user", "content": "Ask me a random question about my past."},
+            ]
+
         response = self.client.chat.completions.create(
             model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": query},
-            ],
+            messages=history,
         )
 
         reply = response.choices[0].message.content
