@@ -1,11 +1,13 @@
 import {useState, useRef, useEffect} from "react";
 import {api} from "../../api.ts";
-import {Box, Button, Grid2 as Grid, TextField} from "@mui/material";
+import {Button, Grid2 as Grid} from "@mui/material";
+import ChatMessageBox from "./ChatMessageBox.tsx";
+import ChatInput from "./ChatInput.tsx";
 
 export default function Chat() {
     interface GptCall {
         id: number | undefined;
-        role: string | undefined;
+        role: "system" | "user" | "assistant";
         refusal: string | undefined;
         content: string | undefined;
     }
@@ -27,7 +29,6 @@ export default function Chat() {
     }];
 
     const [gptCalls, setGptCalls] = useState<GptCall[]>(history);
-    const [formData, setFormData] = useState({ reply: "" });
     const [conversationStarted, setConversationStarted] = useState(false);
 
     const chatContainerRef = useRef<HTMLDivElement | null>(null);
@@ -58,52 +59,47 @@ export default function Chat() {
         setConversationStarted(true);
     };
 
-    const handleReplyClick = (event: React.FormEvent) => {
-        event.preventDefault();
+    const handleReplyClick = (message: string) => {
+        const userMessage: GptCall = {
+            id: undefined,
+            role: "user",
+            refusal: undefined,
+            content: message
+        };
+
+        setGptCalls([...gptCalls, userMessage]);
 
         api.post(
             "/gptcall/",
-            { history: [...gptCalls, {id: undefined, role: "user", refusal: undefined, content: formData.reply}] },
+            { history: [...gptCalls, userMessage] },
             { headers: { Accept: "application/json" } }
         )
         .then((res) => {
             setGptCalls(res.data);
         })
         .catch((err) => console.error(err));
-        setFormData({ reply: "" });
     }
 
-    const chatForm = <Grid size={12}>
-            {gptCalls.filter((message) => ( message.role != "system" )).map((message) => (
-                <div style={{
-                    textAlign: message.role === "user" ? "right" : "left",
-                    borderColor: message.role === "user" ? "blue" : "red"
-                }}>
-                    <p>{message.content}</p>
-                </div>
+    const chatForm = <>
+        <Grid size={12} ref={chatContainerRef} sx={{maxHeight: "60vh", overflowY: "auto" }}>
+            {gptCalls.filter((message) => ( message.role != "system" )).map((message, index) => (
+                <ChatMessageBox
+                    key={index}
+                    message={message.content || ""}
+                    role={message.role} />
             ))}
-            <Box width={"100%"} component={"form"} onSubmit={handleReplyClick}>
-                <TextField
-                    id="queryInput"
-                    label="Query"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    value={formData.reply}
-                    onChange={(e) => setFormData({ reply: e.target.value })}
-                />
-                <Button type={"submit"}>reply</Button>
-            </Box>
-        </Grid>;
+        </Grid>
+        <Grid size={12}>
+            <ChatInput
+                onReply={handleReplyClick}
+            />
+        </Grid>
+    </>;
 
     return (
-        <>
-            <Grid size={12}>
-                {!conversationStarted && <Button onClick={handleStartClick}>
-                    Click Here
-                </Button>}
-                {conversationStarted && chatForm}
-            </Grid>
-        </>
+        <Grid size={8} offset={2} spacing={2}>
+            {!conversationStarted && <Button onClick={handleStartClick}>Click Here</Button>}
+            {conversationStarted && chatForm}
+        </Grid>
     );
 }
