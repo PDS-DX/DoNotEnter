@@ -4,4 +4,4 @@ from .models import GptCall
 class GptCallSerializer(serializers.ModelSerializer):
     class Meta:
         model = GptCall
-        fields = ('id', 'query', 'reply')
+        fields = ('id', 'role', 'refusal', 'content')
