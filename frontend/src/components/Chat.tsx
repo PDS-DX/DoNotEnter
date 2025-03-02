@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useRef, useEffect} from "react";
 import {api} from "../../api.ts";
 import {Box, Button, Grid2 as Grid, TextField} from "@mui/material";
 
@@ -29,6 +29,15 @@ export default function Chat() {
     const [gptCalls, setGptCalls] = useState<GptCall[]>(history);
     const [formData, setFormData] = useState({ reply: "" });
     const [conversationStarted, setConversationStarted] = useState(false);
+
+    const chatContainerRef = useRef<HTMLDivElement | null>(null);
+
+    // Scroll to bottom when new messages are added
+    useEffect(() => {
+        if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    }, [gptCalls]); // Runs whenever `gptCalls` updates
 
     const handleStartClick = () => {
         api.post(
