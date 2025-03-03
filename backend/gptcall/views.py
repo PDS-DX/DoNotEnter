@@ -12,13 +12,10 @@ class GptCallViewSet(ModelViewSet):
 
     # Overriding create (POST) method to use GPTService
     def create(self, request, *args, **kwargs):
-        query = request.data.get("query", "")
-        if not query:
-            return Response({"error": "Query is required"}, status=status.HTTP_400_BAD_REQUEST)
+        history = request.data.get("history", [])
 
         gpt_service = GPTService()
-        logging.info(f"Creating GPT call with query: {query}")
-        gpt_call = gpt_service.create_gpt_call(query)
+        gpt_calls = gpt_service.create_gpt_call(history)
 
-        serializer = self.get_serializer(gpt_call)
+        serializer = self.get_serializer(gpt_calls, many=True)
         return Response(serializer.data, status=status.HTTP_201_CREATED)

@@ -15,8 +15,9 @@ class Migration(migrations.Migration):
             name='GptCall',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('query', models.TextField()),
-                ('reply', models.TextField()),
+                ('role', models.TextField()),
+                ('refusal', models.TextField(null=True, blank=True)),
+                ('content', models.TextField()),
             ],
         ),
     ]
