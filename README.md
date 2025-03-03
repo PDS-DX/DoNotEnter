@@ -115,7 +115,8 @@ To run the react ts application, cd to the `/frontend/` and run
 ```bash
 npm run dev
 ```
-The react ts application should now be running at `http://localhost:5175`
+
+The react ts application should now be running at `http://localhost:5173` but you should double check the terminal output to confirm the port number.
 
 ### OpenAI API Key and Environment Variables
 To use the OpenAI API, you will need to create an account and generate an API key. You can do this by going to the [OpenAI website](https://platform.openai.com/settings/organization/api-keys) to create and save an api key.
