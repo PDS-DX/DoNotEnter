@@ -1,9 +1,40 @@
 # DoNotEnter
 
+---
+
 ## Description
 I don't really know what this is going to be yet but it's certainly something.
 
-## Pre-requisites
+---
+
+## Getting Started
+To run this project locally the easy way, you can use [docker compose](https://docs.docker.com/compose/install/) for your specific operating system. This is a platform independent way of running this project with the least amount of setup required.
+
+Once you have docker and docker-compose installed on your machine and the docker engine running, open a terminal and navigate to the root folder of the project then run
+```bash
+docker-compose up --build
+```
+
+To bring the docker containers you can use the following commands
+```bash
+# To stop the containers
+docker-compose stop
+
+# To stop and delete the containers
+docker-compose down -v
+```
+
+To use the OpenAI API, you will need to create an account and generate an API key. You can do this by going to the [OpenAI website](https://platform.openai.com/settings/organization/api-keys) to create and save an api key.
+Next, you will need to paste your api key into the `docker-compose.yml` file under the backend environment variables for `OPENAI_API_KEY`. Remember, do not commit these api keys to github.
+
+> Note: If using Windows, you may encounter and issue with the Django backend container halting due to an issue with the `/backend/entry.sh` file. 
+> To fix this, you can try to convert the file to using LF(`\n`) line separators instead of the windows default of CRLF(`\r\n`).
+
+---
+
+## Installation
+
+### Pre-requisites
 Python Version 3.13.2
 
 Other Python Packages
@@ -13,10 +44,6 @@ Other Python Packages
 NodeJS Version 22.14.0
 
 NPM Version 10.9.2
-
-## Installation
-
----
 
 ### Windows
 
