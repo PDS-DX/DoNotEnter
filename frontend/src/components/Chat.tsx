@@ -30,15 +30,13 @@ export default function Chat() {
 
     const [gptCalls, setGptCalls] = useState<GptCall[]>(history);
     const [conversationStarted, setConversationStarted] = useState(false);
-
     const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
-    // Scroll to bottom when new messages are added
     useEffect(() => {
         if (chatContainerRef.current) {
             chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
         }
-    }, [gptCalls]); // Runs whenever `gptCalls` updates
+    }, [gptCalls]);
 
     const handleStartClick = () => {
         api.post(
@@ -97,9 +95,13 @@ export default function Chat() {
     </>;
 
     return (
-        <Grid size={8} offset={2} spacing={2}>
-            {!conversationStarted && <Button onClick={handleStartClick}>Click Here</Button>}
-            {conversationStarted && chatForm}
-        </Grid>
+        <>
+            <Grid size={8} offset={2} spacing={2}>
+                {!conversationStarted &&
+                    <Button onClick={handleStartClick}>Click Here</Button>
+                }
+                {conversationStarted && chatForm}
+            </Grid>
+        </>
     );
 }
