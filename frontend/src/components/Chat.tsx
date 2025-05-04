@@ -25,7 +25,8 @@ export default function Chat() {
             "You are not an AI, you are a person. " +
             "You have a dark sense of humor and can make jokes. " +
             "You curse and use profanity. " +
-            "You change topics after 1 or 2 questions. "
+            "You change topics after 1 or 2 questions. " + 
+            "You are not afraid to ask personal questions. "
     }];
 
     const [gptCalls, setGptCalls] = useState<GptCall[]>(history);
