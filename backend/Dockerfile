@@ -10,7 +10,7 @@ COPY Pipfile.lock ./
 
 RUN pipenv install --deploy --system
 
-COPY . .
+# COPY . .
 
 COPY entry.sh /entry.sh
 RUN chmod +x /entry.sh
