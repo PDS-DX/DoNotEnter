@@ -12,7 +12,8 @@ const ReplyInput = styled(OutlinedInput)(({ theme }) => ({
     borderRadius: theme.shape.borderRadius,
     border: `1px solid ${theme.palette.divider}`,
     marginBottom: theme.spacing(2),
-    color: "white"
+    color: "white",
+    backgroundColor: "black"
 }));
 
 export default function ChatInput({ onReply }: ChatInputProps) {

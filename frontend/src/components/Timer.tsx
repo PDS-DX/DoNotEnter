@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Grid2 as Grid, Paper, Typography} from "@mui/material";
+import {Paper, Typography} from "@mui/material";
 
 export default function Timer() {
     const [startTime] = useState(Date.now());
@@ -17,12 +17,10 @@ export default function Timer() {
     const seconds = Math.floor((elapsed % 60000) / 1000);
 
     return (
-        <Grid size={8} offset={2} spacing={2} height={500}>
-            <Paper sx={{ padding: 2 }}>
-                <Typography variant="h4">
-                    {`${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`}
-                </Typography>
-            </Paper>
-        </Grid>
+        <Paper sx={{ padding: 2 }}>
+            <Typography variant="h4">
+                {`${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`}
+            </Typography>
+        </Paper>
     );
 }

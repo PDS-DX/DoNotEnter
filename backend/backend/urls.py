@@ -20,7 +20,7 @@ from rest_framework import routers
 from gptcall import views
 
 router = routers.DefaultRouter()
-router.register(r'gptcall', views.GptCallViewSet, 'gptcall')
+router.register('gptcall', views.GptCallViewSet, 'gptcall')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
