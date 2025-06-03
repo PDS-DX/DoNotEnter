@@ -35,7 +35,7 @@ Next, you will need to paste your api key into the `docker-compose.yml` file und
 ## Installation
 
 ### Pre-requisites
-Python Version 3.13.2
+Python Version 3.12.3
 
 Other Python Packages
 - `pip`
@@ -53,7 +53,7 @@ These Windows installation instructions are fully functional using a clean insta
 First, you will need to clone this repository by either using the `git clone` command or by downloading the zip file and extracting it to your desired location.
 
 #### Python & Pipenv
-To install python, download python version 3.13.2 from the [official website](https://www.python.org/downloads/) and follow the installation instructions.
+To install python, download python version 3.12.3 from the [official website](https://www.python.org/downloads/) and follow the installation instructions.
 
 ***Note: Make sure to add python to your PATH during the installation process otherwise you will have to manually add it later.***
 
