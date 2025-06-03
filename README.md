@@ -112,7 +112,7 @@ OPENAI_API_KEY=your_api_key
 
 These Linux installation instructions aren't as thorough as the Windows instructions because they assume that if you are running Linux, you are familiar with dependencies and package management.
 
-To intialize the python application on Linux, cd to the root directory of the project and run
+To initialize the python application on Linux, cd to the root directory of the project and run
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
